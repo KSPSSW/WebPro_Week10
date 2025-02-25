@@ -17,7 +17,6 @@ export class User {
 
   @Column()
   password: string;
-  // roles: ('admin' | 'user')[];
 
   @Column()
   gender: 'male' | 'female';

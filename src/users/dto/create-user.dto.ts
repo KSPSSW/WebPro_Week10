@@ -6,6 +6,9 @@ import {
   IsNumber,
   Min,
   Max,
+  IsArray,
+  ArrayMinSize,
+  IsInt,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -50,4 +53,13 @@ export class CreateUserDto {
   @Min(1)
   @Max(120)
   age: number;
+
+  @ApiProperty({
+    description: 'ชุด id ของ roles',
+    example: [1, 2],
+  })
+  @IsArray()
+  @ArrayMinSize(1)
+  @IsInt({ each: true })
+  roleIds: number[];
 }

@@ -5,7 +5,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 
-
 @Injectable()
 export class ProductsService {
   constructor(
@@ -39,10 +38,10 @@ export class ProductsService {
     updateProductDto: UpdateProductDto,
   ): Promise<Product> {
     await this.productsRepository.update(id, updateProductDto);
-    const updatedProduct = await this.productsRepository.findOneBy({ id });
-    if (!updatedProduct) {
-      throw new NotFoundException(`Product with ID ${id} not found`);
-    }
+    const updatedProduct = await this.productsRepository.findOneOrFail({
+      where: { id },
+      relations: ['type'],
+    });
     return updatedProduct;
   }
 
