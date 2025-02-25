@@ -67,6 +67,6 @@ export class UsersService {
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
-    await this.usersRepository.remove(user);
+    await this.usersRepository.softRemove(user);
   }
 }
