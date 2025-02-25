@@ -31,6 +31,7 @@ export class Product {
 
   @ManyToOne(() => Type, (type) => type.products)
   type: Type;
+  orderItems: any;
 
   // @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
   // orderItems: OrderItem[];

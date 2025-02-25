@@ -60,10 +60,6 @@ export class OrdersService {
     return this.ordersRepository.findOneOrFail({ where: { id } });
   }
 
-  update(id: number, updateOrderDto: UpdateOrderDto) {
-    return `This action updates a #${id} order`;
-  }
-
   remove(id: number) {
     return this.ordersRepository.delete(id);
   }
