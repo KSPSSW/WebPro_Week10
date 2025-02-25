@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { User } from './users/entities/user.entity';
 import { Product } from './products/entities/product.entity';
+import { TypesModule } from './types/types.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { Product } from './products/entities/product.entity';
     TemperatureModule,
     UsersModule,
     ProductsModule,
+    TypesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
