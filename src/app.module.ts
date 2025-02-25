@@ -9,13 +9,13 @@ import { DataSource } from 'typeorm';
 import { User } from './users/entities/user.entity';
 import { Product } from './products/entities/product.entity';
 import { TypesModule } from './types/types.module';
-
+import { Type } from './types/entities/type.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'mydb.sqlite',
-      entities: [User, Product],
+      entities: [User, Product, Type],
       synchronize: true,
     }),
     TemperatureModule,
