@@ -12,12 +12,14 @@ import { TypesModule } from './types/types.module';
 import { Type } from './types/entities/type.entity';
 import { Role } from './role/entities/role.entity';
 import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'mydb.sqlite',
-      entities: [User, Product, Type, Role],
+      entities: [User, Product, Type, Role, Order],
       synchronize: true,
     }),
     TemperatureModule,
