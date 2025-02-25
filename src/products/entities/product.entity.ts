@@ -1,4 +1,13 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Type } from 'src/types/entities/type.entity';
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Product {
@@ -11,6 +20,18 @@ export class Product {
   @Column()
   price: number;
 
-  @Column()
-  category: 'drink' | 'bakery';
+  @CreateDateColumn()
+  created: Date;
+
+  @UpdateDateColumn()
+  updated: Date;
+
+  @DeleteDateColumn()
+  deleted: Date;
+
+  @ManyToOne(() => Type, (type) => type.products)
+  type: Type;
+
+  // @OneToMany(() => OrderItem, (orderItem) => orderItem.product)
+  // orderItems: OrderItem[];
 }
