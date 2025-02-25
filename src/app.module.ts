@@ -11,6 +11,7 @@ import { Product } from './products/entities/product.entity';
 import { TypesModule } from './types/types.module';
 import { Type } from './types/entities/type.entity';
 import { Role } from './role/entities/role.entity';
+import { OrdersModule } from './orders/orders.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -23,6 +24,7 @@ import { Role } from './role/entities/role.entity';
     UsersModule,
     ProductsModule,
     TypesModule,
+    OrdersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
