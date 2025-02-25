@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
-import { validate } from 'class-validator';
+
 
 @Injectable()
 export class ProductsService {
@@ -14,23 +14,23 @@ export class ProductsService {
   ) {}
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
-    const errors = await validate(createProductDto);
-    if (errors.length > 0) {
-      throw new Error(`Validation failed: ${errors.toString()}`);
-    }
     const newProduct = this.productsRepository.create(createProductDto);
-    return await this.productsRepository.save(newProduct);
+    await this.productsRepository.save(newProduct);
+    return this.productsRepository.findOneOrFail({
+      where: { id: newProduct.id },
+      relations: ['type'],
+    });
   }
 
   async findAll(): Promise<Product[]> {
-    return await this.productsRepository.find();
+    return await this.productsRepository.find({ relations: ['type'] });
   }
 
   async findOne(id: number): Promise<Product> {
-    const product = await this.productsRepository.findOneBy({ id });
-    if (!product) {
-      throw new NotFoundException(`Product with ID ${id} not found`);
-    }
+    const product = await this.productsRepository.findOneOrFail({
+      where: { id },
+      relations: ['type'],
+    });
     return product;
   }
 

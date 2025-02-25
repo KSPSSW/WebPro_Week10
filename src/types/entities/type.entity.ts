@@ -18,13 +18,13 @@ export class Type {
   name: string;
 
   @CreateDateColumn()
-  created: Date;
+  createdAt: Date;
 
   @UpdateDateColumn()
-  updated: Date;
+  updatedAt: Date;
 
   @DeleteDateColumn()
-  deleted: Date;
+  deletedAt: Date;
 
   @OneToMany(() => Product, (product) => product.type)
   products: Product[];
