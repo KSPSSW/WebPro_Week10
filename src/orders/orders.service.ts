@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto } from './dto/update-order.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Order } from './entities/order.entity';
 import { Repository } from 'typeorm';
@@ -52,11 +51,13 @@ export class OrdersService {
   }
 
   findAll() {
-    return `This action returns all orders`;
+    return this.ordersRepository.find({
+      relations: { orderItems: true, user: true },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} order`;
+    return this.ordersRepository.findOneOrFail({ where: { id } });
   }
 
   update(id: number, updateOrderDto: UpdateOrderDto) {
@@ -64,6 +65,6 @@ export class OrdersService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} order`;
+    return this.ordersRepository.delete(id);
   }
 }
